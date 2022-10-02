@@ -37,5 +37,5 @@ NR > 1 {
 
 END {
     if (advertencias == 0)
-        print "Espacio en filesistems OK"
+        print "Espacio en filesystems OK"
 }
