@@ -1,10 +1,13 @@
 # Script awk para procesar el output del comando _df_  y
 # para advertir si algún filesystem está ocupado por encima
 # del _límite_ definido.
-#
+
 # Dependiendo la versión de _df_ instalada en el sistema, puede
 # ser necesario utilizar la opción -P (use the POSIX output format)
 # o las opciones -tk en versiones non-POSIX.
+
+# Ejemplo de uso:
+# ssh -xq ${USR}@${IP} 'df -P' | awk -f <path a este script> &> reporte_diario.log
 
 # EXPECTED INPUT:
 # 1ra línea:
