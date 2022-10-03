@@ -7,7 +7,7 @@
 # o las opciones -tk en versiones non-POSIX.
 
 # Ejemplo de uso:
-# ssh -xq ${USR}@${IP} 'df -P' | awk -f <path a este script> &> reporte_diario.log
+# ssh -xq ${USR}@${IP} 'df -P' | awk -f <path a este script> 2> /dev/null 1> reporte_diario.log
 
 # EXPECTED INPUT:
 # 1ra línea:
@@ -24,7 +24,7 @@ BEGIN {
 }
 
 NR == 1 {
-    if ($1 !~ "Filesystem" || $5 != "Capacity" || $6 !~ /Mounted([:space:]on)?/){
+    if ($1 != "Filesystem" || $5 != "Capacity" || $6 !~ /Mounted([:space:]on)?/){
         printf "Formato de entrada no habitual.\n¿Esta versión de _df_ es POSIX-compliant? ¿_df_ fue invocado con la opción -P?)\n\n" > "/dev/stderr"
 	system("df -h")
 	advertencias++
