@@ -10,6 +10,8 @@
 # 1ra línea:
 # Filesystem	1024-blocks	Used	Available	Capacity	Mounted on
 
+# https://github.com/oliver-almaraz/awk_parse_df/
+
 
 BEGIN {
     # Definir el porcentaje de uso que se considera alto:
@@ -19,8 +21,8 @@ BEGIN {
 }
 
 NR == 1 {
-    if ($5 != "Capacity" || $6 !~ /Mounted([:space:]on)?/){
-        printf "(parece que el formato de _df_ cambió, revisa el script awk)\n\n"
+    if ($1 !~ "Filesystem" || $5 != "Capacity" || $6 !~ /Mounted([:space:]on)?/){
+        printf "Formato de entrada no habitual.\n¿Esta versión de _df_ es POSIX-compliant? ¿_df_ fue invocado con la opción -P?)\n\n" > "/dev/stderr"
 	system("df -h")
 	advertencias++
         exit
