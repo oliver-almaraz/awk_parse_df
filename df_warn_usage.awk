@@ -7,7 +7,7 @@
 # o las opciones -tk en versiones non-POSIX.
 
 # Ejemplo de uso:
-# ssh -xq ${USR}@${IP} 'df -P' | awk -f <path a este script> 2> /dev/null 1> reporte_diario.log
+# ssh -xq ${USR}@${IP} 'df -P' | awk -f df_warn_usage.awk LIMIT=80 2>/dev/null 1>reporte_diario.log
 
 # EXPECTED INPUT:
 # 1ra línea:
