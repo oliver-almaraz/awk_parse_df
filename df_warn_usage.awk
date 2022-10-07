@@ -18,7 +18,8 @@
 
 BEGIN {
     # Definir el porcentaje de uso que se considera alto:
-    limite=90
+    if (ARGC != 2)
+        LIMIT=90
 
     advertencias=0
 }
@@ -26,15 +27,14 @@ BEGIN {
 NR == 1 {
     if ($1 != "Filesystem" || $5 != "Capacity" || $6 !~ /Mounted([:space:]on)?/){
         printf "Formato de entrada no habitual.\n¿Esta versión de _df_ es POSIX-compliant? ¿_df_ fue invocado con la opción -P?)\n\n" > "/dev/stderr"
-	system("df -h")
 	advertencias++
-        exit
+        exit 42
     }
 }
 
 NR > 1 {
     sub("%","",$5)
-    if ($5 >= limite){
+    if ($5 >= LIMIT){
         print "Advertencia: "$5"% usado en filesystem "$1" montado en "$6
         advertencias++
     }
